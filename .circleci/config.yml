@@ -24,8 +24,9 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
-            docker container ls -a
+            ls -l
       - run:
           name: Testing Images
           command: |
+            ls 
             npm run test
