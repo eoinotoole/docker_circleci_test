@@ -7,3 +7,5 @@ jobs:
     steps:
       - checkout
       - run: npm i
+      - run: pwd
+      - run: node ./src/index.js
