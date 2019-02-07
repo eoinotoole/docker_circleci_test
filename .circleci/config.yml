@@ -22,4 +22,5 @@ jobs:
             ls -l
       - run:
           name: Building Images
+          command: |
             docker-compose up
