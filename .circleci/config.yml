@@ -29,4 +29,4 @@ jobs:
           name: Testing Images
           command: |
             docker exec -it app_server_1 sh
-            npm run test
+            ls
