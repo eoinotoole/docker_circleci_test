@@ -1,10 +1,25 @@
 version: 2
 jobs:
   build:
-    machine:
-      docker_layer_caching: true
+    docker:
+      - image: docker:17.12.0-ce-git
+    working_directory: /app
     steps:
       - checkout
+      - setup_remote_docker
+      - run:
+          name: Installing Dependencies
+          command: |
+            set -x
+            apk add --no-cache --no-progress bash py-pip
+            pip install --quiet docker-compose
+      - run:
+          name: Logging Docker and Application Information
+          command: |
+            set -x
+            docker -v
+            docker-compose -v
+            ls -l
       - run:
           name: Building Images
           command: |
@@ -15,4 +30,6 @@ jobs:
           command: |
             docker container ls -a
             docker exec -it app_server_1
-            ls -a
+            ls
+            ls -l
+            pwd
