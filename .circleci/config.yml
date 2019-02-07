@@ -8,9 +8,10 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
+            docker container ls -a
       - run:
           name: Testing Images
           command: |
-            docker exec -it app_server_1 sh
+            docker exec -it project_server_1 sh
             ls
             npm run test
