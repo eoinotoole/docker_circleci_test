@@ -27,5 +27,7 @@ jobs:
       - run:
           name: Testing Images
           command: |
-            docker exec -it docker_circleci_test_server_1 sh
+            docker exec -it app_server_1 sh
+            ls
+            pwd
             npm run test
