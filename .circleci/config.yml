@@ -2,10 +2,24 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:10.15.1
+      - image: docker: 17.12.0-ce-git
     working_directory: /app
     steps:
       - checkout
-      - run: npm i
-      - run: pwd
-      - run: node ./src/index.js
+      - setup_remote_docker
+      - run: 
+          name: Installing Dependencies
+          command: |
+            set -x
+            apk add --no-cache --no-progress bash py-pip
+            pip install --quiet docker-compose
+      - run:
+          name: Logging Docker and Application Information
+          command: |
+            set -x
+            docker -v
+            docker-compose -v
+            ls -l
+      - run:
+          name: Testing the Docker installation
+          command: docker container run hello-world
