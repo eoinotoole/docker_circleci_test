@@ -12,6 +12,4 @@ jobs:
       - run:
           name: Testing Images
           command: |
-            docker exec -it project_server_1 sh
-            ls
-            npm run test
+            docker-compose exec project_server_1 npm run test
