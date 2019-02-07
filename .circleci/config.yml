@@ -1,1 +1,17 @@
 version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: node:10.15.1
+#     working_directory: /app
+#     steps:
+#       - checkout
+#       - run: npm i
+
+#       - save_cache:
+#           paths:
+#             - node_modules
+#           key: v1-dependencies-{{ checksum "package.json" }}
+
+#       # run tests!
+#       - run: yarn test
