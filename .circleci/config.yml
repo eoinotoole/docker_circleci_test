@@ -15,4 +15,4 @@ jobs:
           command: |
             docker container ls -a
             docker exec -it app_server_1
-            ls
+            ls -a
