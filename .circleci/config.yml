@@ -23,4 +23,8 @@ jobs:
       - run:
           name: Building Images
           command: |
-            docker-compose up
+            docker-compose up -d
+      - run:
+          name: Testing Images
+          command: |
+            npm run test
