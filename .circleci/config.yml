@@ -31,5 +31,4 @@ jobs:
             docker container ls -a
             docker exec -it app_server_1
             ls
-            ls -l
             pwd
