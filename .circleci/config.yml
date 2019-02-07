@@ -9,4 +9,4 @@ jobs:
           name: install & build
           command: |
             npm i
-            npm test
+            npm run test
