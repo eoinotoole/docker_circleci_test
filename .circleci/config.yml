@@ -24,11 +24,8 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
-            ls -l
       - run:
           name: Testing Images
           command: |
-            docker container ls -a
-            docker exec -it app_server_1
-            ls
-            pwd
+            docker exec -it docker_circleci_test_server_1 sh
+            npm run test
