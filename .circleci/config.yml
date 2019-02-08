@@ -43,4 +43,6 @@ workflows:
             - build-test
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - staging
