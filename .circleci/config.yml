@@ -29,3 +29,18 @@ jobs:
           name: Deploying Images
           command: |
             eb deploy $CIRCLE_BRANCH-docker-circleci-test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+        requires:
+          - build
+      - deploy
+        requires:
+          - test
+        filters:
+          branches:
+            only: master
