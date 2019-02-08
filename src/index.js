@@ -7,7 +7,7 @@ const app = express();
 
 app.get("/", (req, res) => {
   console.log(req.url);
-  res.send("hello from master!");
+  res.send("hello from master!!");
 });
 
 app.listen(port, () => {
