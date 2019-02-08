@@ -5,6 +5,11 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+console.log(process.env.RDS_HOSTNAME);
+console.log(process.env.RDS_USERNAME);
+console.log(process.env.DB_NAME);
+console.log(process.env.RDS_PORT);
+
 app.get("/", (req, res) => {
   console.log(req.url);
   res.send("hello from staging!");

@@ -4,11 +4,22 @@ jobs:
     machine: true
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Package Cache
+          key: node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Building Images
           command: |
             docker-compose up -d
+<<<<<<< HEAD
             docker container ls -a
+=======
+      - save_cache:
+          name: Save Package Cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules/
+>>>>>>> feature/add-db
       - run:
           name: Testing Images
           command: |
@@ -18,6 +29,9 @@ jobs:
     machine: true
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Package Cache
+          key: node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Installing dependencies
           command: |
@@ -28,6 +42,11 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
+      - save_cache:
+          name: Save Package Cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules/
       - run:
           name: Deploying Images
           command: |
