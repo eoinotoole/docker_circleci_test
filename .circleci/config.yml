@@ -15,13 +15,15 @@ jobs:
           command: |
             docker-compose up -d
             docker container ls -a
+  test:
+    steps:
       - run:
           name: Testing Images
           command: |
             docker exec -it project_server_1 npm run test
+  deploy:
+    steps:
       - run:
           name: Deploying Images
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              eb deploy $CIRCLE_BRANCH-docker-circleci-test
-            fi
+            eb deploy $CIRCLE_BRANCH-docker-circleci-test
