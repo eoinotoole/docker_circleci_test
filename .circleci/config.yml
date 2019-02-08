@@ -1,9 +1,21 @@
 version: 2
 jobs:
-  build:
+  build-test:
     machine: true
     steps:
       - checkout
+      - run:
+          name: Building Images
+          command: |
+            docker-compose up -d
+      - run:
+          name: Testing Images
+          command: |
+            docker container ls -a
+            docker exec -it project_server_1 npm run test
+  deploy:
+    machine: true
+    steps:
       - run:
           name: Installing dependencies
           command: |
@@ -14,18 +26,6 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
-            docker container ls -a
-  test:
-    machine: true
-    steps:
-      - run:
-          name: Testing Images
-          command: |
-            docker container ls -a
-            docker exec -it project_server_1 npm run test
-  deploy:
-    machine: true
-    steps:
       - run:
           name: Deploying Images
           command: |
@@ -33,10 +33,12 @@ jobs:
 
 workflows:
   version: 2
-  build__test__deploy:
+  build-test__deploy:
     jobs:
-      - build
-      - test:
+      - build-test
+      - deploy
           requires:
-            - build
-      # - deploy
+            - build-test
+          filters:
+            branches:
+              only: master
