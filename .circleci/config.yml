@@ -36,7 +36,7 @@ workflows:
   build-test__deploy:
     jobs:
       - build-test
-      - deploy
+      - deploy:
           requires:
             - build-test
           filters:
