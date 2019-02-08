@@ -22,4 +22,6 @@ jobs:
       - run:
           name: Deploying Images
           command: |
-            eb deploy $CIRCLE_BRANCH-docker-circleci-test
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              eb deploy $CIRCLE_BRANCH-docker-circleci-test
+            fi
