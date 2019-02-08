@@ -5,14 +5,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-           name: Restore Package Cache
+          name: Restore Package Cache
            keys:
              - m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
       - run:
           name: Building Images
           command: |
             docker-compose up -d
-       - save_cache: 
+      - save_cache: 
+          name: Save Package Cache
           key: m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
           paths:
             - "./node_modules/"
