@@ -24,3 +24,4 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               eb deploy $CIRCLE_BRANCH-docker-circleci-test
+            fi
