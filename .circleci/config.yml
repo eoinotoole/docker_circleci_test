@@ -13,7 +13,7 @@ jobs:
           name: Testing Images
           command: |
             docker exec -it project_server_1 npm run test
-      - run
+      - run:
           name: Deploying Images
           command: |
             eb deploy $CIRCLE_BRANCH-circleci-test
