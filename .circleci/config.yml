@@ -6,8 +6,7 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Package Cache
-           keys:
-             - m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+           key: m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
       - run:
           name: Building Images
           command: |
