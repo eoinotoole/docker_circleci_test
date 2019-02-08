@@ -8,6 +8,7 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
+            docker container ls -a
       - run:
           name: Testing Images
           command: |
