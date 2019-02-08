@@ -19,10 +19,8 @@ jobs:
           name: Testing Images
           command: |
             docker exec -it project_server_1 npm run test
-       - when:
-          condition: $CIRCLE_BRANCH == master
-          steps: 
-            - run:
-                name: Deploying Images
-                command: |
-                  eb deploy $CIRCLE_BRANCH-docker-circleci-test
+      - run:
+          name: Deploying Images
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              eb deploy $CIRCLE_BRANCH-docker-circleci-test
