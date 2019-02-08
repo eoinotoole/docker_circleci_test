@@ -32,15 +32,11 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build__test__deploy:
     jobs:
       - build
       - test
         requires:
           - build
       - deploy
-        requires:
-          - test
-        filters:
-          branches:
-            only: master
+        
