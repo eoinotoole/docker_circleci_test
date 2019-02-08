@@ -1,6 +1,19 @@
 version: 2
 jobs:
-  build:
+  build-test:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Building Images
+          command: |
+            docker-compose up -d
+      - run:
+          name: Testing Images
+          command: |
+            docker container ls -a
+            docker exec -it project_server_1 npm run test
+  deploy:
     machine: true
     steps:
       - checkout
@@ -14,14 +27,19 @@ jobs:
           name: Building Images
           command: |
             docker-compose up -d
-            docker container ls -a
-      - run:
-          name: Testing Images
-          command: |
-            docker exec -it project_server_1 npm run test
       - run:
           name: Deploying Images
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              eb deploy $CIRCLE_BRANCH-docker-circleci-test
-            fi
+            eb deploy $CIRCLE_BRANCH-docker-circleci-test
+
+workflows:
+  version: 2
+  build-test__deploy:
+    jobs:
+      - build-test
+      - deploy:
+          requires:
+            - build-test
+          filters:
+            branches:
+              only: master

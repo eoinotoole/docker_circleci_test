@@ -7,7 +7,11 @@ const app = express();
 
 app.get("/", (req, res) => {
   console.log(req.url);
+<<<<<<< HEAD
   res.send("hello from staging!!");
+=======
+  res.send("hello from master!");
+>>>>>>> master
 });
 
 app.listen(port, () => {
