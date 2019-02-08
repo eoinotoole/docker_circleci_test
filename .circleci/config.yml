@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-test:
     machine: true
     steps:
       - checkout
@@ -12,4 +12,37 @@ jobs:
       - run:
           name: Testing Images
           command: |
+            docker container ls -a
             docker exec -it project_server_1 npm run test
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Installing dependencies
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install awsebcli --upgrade
+      - run:
+          name: Building Images
+          command: |
+            docker-compose up -d
+      - run:
+          name: Deploying Images
+          command: |
+            eb deploy $CIRCLE_BRANCH-docker-circleci-test
+
+workflows:
+  version: 2
+  build-test__deploy:
+    jobs:
+      - build-test
+      - deploy:
+          requires:
+            - build-test
+          filters:
+            branches:
+              only:
+                - master
+                - staging
