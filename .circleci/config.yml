@@ -16,12 +16,14 @@ jobs:
             docker-compose up -d
             docker container ls -a
   test:
+    machine: true
     steps:
       - run:
           name: Testing Images
           command: |
             docker exec -it project_server_1 npm run test
   deploy:
+    machine: true
     steps:
       - run:
           name: Deploying Images
