@@ -6,16 +6,16 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Package Cache
-           key: m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Building Images
           command: |
             docker-compose up -d
-      - save_cache: 
+      - save_cache:
           name: Save Package Cache
-          key: m2-npm-packages-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: node_modules-{{ checksum "package-lock.json" }}
           paths:
-            - "./node_modules/"
+            - ./node_modules/
       - run:
           name: Testing Images
           command: |
@@ -50,6 +50,6 @@ workflows:
             - build-test
           filters:
             branches:
-              only: 
+              only:
                 - master
                 - staging
