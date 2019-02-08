@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Testing Images
           command: |
+            docker container ls -a
             docker exec -it project_server_1 npm run test
   deploy:
     machine: true
@@ -36,4 +37,4 @@ workflows:
     jobs:
       - build
       - test
-      - deploy
+      # - deploy
