@@ -7,11 +7,7 @@ const app = express();
 
 app.get("/", (req, res) => {
   console.log(req.url);
-<<<<<<< HEAD
-  res.send("hello from staging!!");
-=======
-  res.send("hello from master!");
->>>>>>> master
+  res.send("hello from staging!");
 });
 
 app.listen(port, () => {
